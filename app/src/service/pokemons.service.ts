@@ -45,6 +45,7 @@ export class PokemonsService {
         )
         return await this.pokemonsRepository.findOne(id);
     }
+
     async deleteOne(id: string): Promise<void> {
         let resp = await this.pokemonsRepository.findOne(id);
 
