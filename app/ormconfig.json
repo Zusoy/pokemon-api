@@ -1,0 +1,24 @@
+{
+    "type": "mysql",
+    "host": "mysql",
+    "port": 3306,
+    "username": "root",
+    "password": "PYm[fkUfPSn<P6K%",
+    "database": "pokemon",
+    "synchronize": true,
+    "logging": false,
+    "entities": [
+        "dist/entity/*.entity.js"
+    ],
+    "migrations": [
+        "dist/migration/*.migration.js"
+    ],
+    "subscribers": [
+        "dist/subscriber/*.subscriber.js"
+    ],
+    "cli": {
+        "entitiesDir": "src/entity",
+        "migrationsDir": "src/migration",
+        "subscribersDir": "src/subscriber"
+    }
+}

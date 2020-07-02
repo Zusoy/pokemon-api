@@ -16,10 +16,8 @@ services:
   mysql:
     image: mysql:5
     restart: on-failure
-    env_file:
-      - ./.env
     environment:
-      MYSQL_ROOT_PASSWORD: '${DB_PASS}'
-      MYSQL_DATABASE: '${DB_NAME}'
+      MYSQL_ROOT_PASSWORD: 'PYm[fkUfPSn<P6K%'
+      MYSQL_DATABASE: 'pokemon'
     ports:
       - '3306:3306'
