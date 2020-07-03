@@ -9,25 +9,25 @@ import { setupDB, initializeDB } from '../src/connection';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-describe('PokemonController (e2e)', async () => {
+describe('PokemonController (e2e)', () => {
     let app: INestApplication;
-
-    beforeAll(async() => {
-        await initializeDB();
-    });
 
     beforeAll(async () => {
         const moduleFixture: TestingModule = await Test.createTestingModule({
-            imports: [PokemonsModule]
+            imports: [AppModule]
         }).compile();
 
         app = moduleFixture.createNestApplication();
         await app.init();
     });
 
-    it('/ (GET)', () => {
+    afterAll(async () => {
+        await app.close();
+      });
+
+    it('/pokemons (GET)', () => {
         return request(app.getHttpServer())
-          .get('/')
+          .get('/pokemons')
           .expect(200);
     });
 });
