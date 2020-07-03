@@ -1,16 +1,14 @@
 import { Controller, Get, Param, Body, Post, Put, Delete } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { PokemonsService } from '../service/pokemons.service'
-import { CreatePokemonDto } from 'src/dto/create-pokemon.dto';
-import { UpdatePokemonDto } from 'src/dto/update-pokemon.dto';
+import { CreatePokemonDto } from '../dto/create-pokemon.dto';
+import { UpdatePokemonDto } from '../dto/update-pokemon.dto';
 
 @Controller('pokemons')
 @ApiTags('pokemons')
 export class PokemonController {
 
-    public constructor(private pokemonsService: PokemonsService) {
-
-    }
+    public constructor(private pokemonsService: PokemonsService) {}
 
     @Get()
     public getPokemons() {

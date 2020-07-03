@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { PokemonType } from "src/entity/pokemon.type.enum";
+import { PokemonType } from "../entity/pokemon.type.enum";
 
 export class CreatePokemonDto {
     @ApiProperty({description: 'The name of the Pokemon'})
