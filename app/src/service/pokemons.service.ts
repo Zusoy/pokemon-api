@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Pokemon } from 'src/entity/pokemon.entity';
-import { CreatePokemonDto } from 'src/dto/create-pokemon.dto';
-import { UpdatePokemonDto } from 'src/dto/update-pokemon.dto';
+import { Pokemon } from '../entity/pokemon.entity';
+import { CreatePokemonDto } from '../dto/create-pokemon.dto';
+import { UpdatePokemonDto } from '../dto/update-pokemon.dto';
 
 @Injectable()
 export class PokemonsService {
