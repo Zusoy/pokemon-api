@@ -10,7 +10,13 @@ services:
     user: node
     ports:
       - "3000:3000"
-  
+      
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8083:8080
+
   mysql:
     image: mysql:5
     restart: on-failure

@@ -3,7 +3,7 @@ import { IsEnum } from 'class-validator';
 import { PokemonType } from "./pokemon.type.enum";
 import { Box } from "./box.entity";
 
-@Entity()
+@Entity({name: "Pokemon"})
 export class Pokemon
 {
     @PrimaryGeneratedColumn()

@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn } from "typeorm";
 import { Pokemon } from "./pokemon.entity";
 import { Human } from "./human.entity";
 
-@Entity()
+@Entity({name: "Box"})
 export class Box
 {
     @PrimaryGeneratedColumn()
