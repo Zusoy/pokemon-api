@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,9 +7,8 @@ import {
 } from "react-router-dom";
 import * as pages from './pages'
 
-function App() {
-  
-  return (<Router>
+const App = () => 
+  <Router>
     <div>
       <nav>
         <ul>
@@ -25,9 +23,6 @@ function App() {
           </li>
         </ul>
       </nav>
-
-      {/* A <Switch> looks through its children <Route>s and
-          renders the first one that matches the current URL. */}
       <Switch>
         <Route exact path="/">
           <pages.Home />
@@ -40,6 +35,6 @@ function App() {
         </Route>
       </Switch>
     </div>
-  </Router>)
-}
+  </Router>
+
 export default App;
