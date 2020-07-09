@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn } from "typeorm";
 import { Pokemon } from "./pokemon.entity";
+import { Human } from "./human.entity";
 
-@Entity()
+@Entity({name: "Box"})
 export class Box
 {
     @PrimaryGeneratedColumn()
@@ -9,4 +10,7 @@ export class Box
 
     @OneToMany(type => Pokemon, pokemon => pokemon.box)
     pokemons: Pokemon[];
+
+    @ManyToOne(type => Human, human => human.boxes)
+    owner: Human
 }
