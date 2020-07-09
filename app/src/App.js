@@ -6,9 +6,14 @@ import {
   Link
 } from "react-router-dom";
 import * as pages from './pages'
+import { fetchAllTrainers } from './services/fetchers';
 
-const App = () => 
-  <Router>
+const App = () => {
+  
+  console.log(fetchAllTrainers("http://localhost:3000/pokemons", fetch));
+
+  return (
+    <Router>
     <div>
       <nav>
         <ul>
@@ -36,5 +41,7 @@ const App = () =>
       </Switch>
     </div>
   </Router>
+  )
+}
 
 export default App;
