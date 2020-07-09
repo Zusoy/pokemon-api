@@ -28,6 +28,7 @@ stack.kill:
 .PHONY: js.install
 js.install:
 	docker-compose run --rm api npm install
+	docker-compose run --rm app npm install
 
 
 ############

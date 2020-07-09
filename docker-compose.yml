@@ -10,6 +10,17 @@ services:
     user: node
     ports:
       - "3000:3000"
+
+  app:
+    image: node:12.17.0-alpine3.11
+    command: npm run start
+    volumes:
+      - './app:/app'
+    working_dir: /app
+    user: node
+    ports: 
+      - "80:3000"
+    stdin_open: true
       
   adminer:
     image: adminer
