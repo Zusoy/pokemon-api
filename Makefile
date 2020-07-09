@@ -3,7 +3,7 @@
 #########
 
 .PHONY: stack
-stack: stack.build stack.start js.install
+stack: stack.build stack.start js.install database.migrate
 
 .PHONY: stack.build
 stack.build:
@@ -27,17 +27,13 @@ stack.kill:
 
 .PHONY: js.install
 js.install:
-	docker-compose run --rm app npm install
+	docker-compose run --rm api npm install
 
 
 ############
 # DATABASE #
 ############
 
-.PHONY: database
-database:
-	database.migrate
-
 .PHONY: database.migrate
 database.migrate:
-	docker-compose run --rm app npm run migration:migrate
+	docker-compose run --rm api npm run migration:migrate
