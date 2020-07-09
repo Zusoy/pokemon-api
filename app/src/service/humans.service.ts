@@ -13,7 +13,7 @@ export class HumansService {
     ) { }
 
     findAll(): Promise<Human[]> {
-        return this.humansRepository.find({ relations: ["boxes"] });
+        return this.humansRepository.find();
     }
 
     async findOne(id: string): Promise<Human> {

@@ -13,7 +13,7 @@ export class BoxesService {
     ) { }
 
     findAll(): Promise<Box[]> {
-        return this.boxesRepository.find();
+        return this.boxesRepository.find({ relations: ["owner"] });
     }
 
     async findOne(id: string): Promise<Box> {
