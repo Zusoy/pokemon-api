@@ -26,7 +26,7 @@ const TrainerList = ({ trainers }) => {
         <>
             <List className={classes.root}>
                 {trainers.map(trainer => 
-                    <ListItem>
+                    <ListItem key={trainer.id} >
                         <ListItemText primary={trainer.name} />
                         <IconButton>
                             <CreateIcon />
