@@ -38,13 +38,14 @@ export class PokemonsService {
         let types = box.pokemons.map(pokemon => pokemon.type)
 
         types = [...new Set(types)];
+        console.log(types)
 
         // check if pokemon length of box is less than 24
         if(box.pokemons.length >= 24){
             throw new maxPokemonLengthInBox
         }
 
-        else if(types.includes(createPokemonDto.type) && types.length <= 2){
+        else if(box.pokemons.length <= 2 || types.includes(createPokemonDto.type) && types.length <= 2){
             return this.pokemonsRepository.save(createPokemonDto);
         }
 
