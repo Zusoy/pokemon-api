@@ -1,7 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, ListItem, ListItemText, List, Box, IconButton } from "@material-ui/core"
 import CreateIcon from '@material-ui/icons/Create';
+import { fetchAllTrainers } from '../services/fetchers';
 
 const useStyles = makeStyles({
     root: {
@@ -17,6 +18,9 @@ const useStyles = makeStyles({
 const ListHuman = () => {
     const classes = useStyles();
 
+    fetchAllTrainers().then(trainers => console.log(trainers));
+
+
     return (
         <Box m={2}>
             <h2>Tous les dresseurs</h2>
@@ -24,13 +28,13 @@ const ListHuman = () => {
                 <ListItem >
                     <ListItemText primary={"Dresseur 1"} />
                     <IconButton className={classes.icon} aria-label="edit">
-                        <CreateIcon/>
+                        <CreateIcon />
                     </IconButton>
                 </ListItem >
                 <ListItem >
                     <ListItemText primary={"Dresseur 1"} />
                     <IconButton className={classes.icon} aria-label="edit">
-                        <CreateIcon/>
+                        <CreateIcon />
                     </IconButton>
                 </ListItem>
             </List >
