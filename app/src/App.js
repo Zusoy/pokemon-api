@@ -6,8 +6,9 @@ import {
   Link
 } from "react-router-dom";
 import * as pages from './pages'
+import { Grid } from '@material-ui/core';
 
-const App = () => 
+const App = () =>
   <Router>
     <div>
       <nav>
@@ -16,10 +17,10 @@ const App = () =>
             <Link to="/">Acceuil</Link>
           </li>
           <li>
-            <Link to="/add-trainer">Ajouter un dresseur</Link>
+            <Link to="/humans">Voir la listes des dresseurs</Link>
           </li>
           <li>
-            <Link to="/add-pokemon">Ajouter Pokemon</Link>
+            <Link to="/pokemons">Voir la listes des Pokemons</Link>
           </li>
         </ul>
       </nav>
@@ -27,11 +28,22 @@ const App = () =>
         <Route exact path="/">
           <pages.Home />
         </Route>
-        <Route path="/add-pokemon">
-          <pages.AddPokemon />
+        <Route path="/pokemons">
+          <pages.ListPokemon />
         </Route>
-        <Route path="/add-trainer">
-          <pages.AddTrainer />
+        <Route path="/humans">
+          <Grid container xs={12} spacing={0}>
+            <Grid container item xs={2} justify="center">
+              <pages.ListHuman />
+            </Grid>
+            <Grid item container xs={2} justify="center">
+              <pages.ListHuman />
+            </Grid>
+            <Grid item container xs={2} justify="center">
+              <pages.ListHuman />
+            </Grid>
+          </Grid>
+
         </Route>
       </Switch>
     </div>
