@@ -22,7 +22,8 @@ const pokeFetch = async (endpoint, method = HTTP_METHODS.GET, data = {}) => {
         mode: 'cors',
         cache: 'no-cache',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
         }
     };
 
