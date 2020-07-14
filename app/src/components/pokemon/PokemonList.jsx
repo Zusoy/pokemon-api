@@ -16,7 +16,7 @@ import {
     FormControl
 } from "@material-ui/core"
 import CreateIcon from '@material-ui/icons/Create';
-import { createPokemon } from '../../services/fetchers';
+import { createPokemon, updatePokemon } from '../../services/fetchers';
 import { red } from '@material-ui/core/colors';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -57,8 +57,10 @@ const PokemonList = ({ pokemons, boxId, setPokemons }) => {
     const [modalStyle] = useState(getModalStyle);
     const [name, setName] = useState("");
     const [type, setType] = useState("");
+    const [pokemon, setPokemon] = useState(null);
 
     const [open, setOpen] = useState(false);
+    const [updateOpen, setUpdateOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);
@@ -67,6 +69,16 @@ const PokemonList = ({ pokemons, boxId, setPokemons }) => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleOpenUpdate = pokemon => {
+        setPokemon(pokemon);
+        setName(pokemon.name);
+        setUpdateOpen(true);
+    }
+
+    const handleCloseUpdate = () => {
+        setUpdateOpen(false);
+    }
 
     const handleChangeName = (event) => {
         setName(event.target.value);
@@ -99,7 +111,10 @@ const PokemonList = ({ pokemons, boxId, setPokemons }) => {
                 </RadioGroup>
             </FormControl>
             <br></br>
-            <Button onClick={() => { createPokemon({ name: name, type: type, "box": boxId }).then(res => finishPokemon(res)) }} variant="contained">Oui</Button>
+            {add
+            ? <Button onClick={() => { createPokemon({ name: name, type: type, "box": boxId }).then(res => finishPokemon(res)) }} variant="contained">Oui</Button>
+            : <Button onClick={() => { updatePokemon(pokemon.id, { name: name, type: type }) } } variant="contained">Oui</Button> 
+            }
         </div>
     };
 
@@ -111,7 +126,7 @@ const PokemonList = ({ pokemons, boxId, setPokemons }) => {
                 {pokemons.map(pokemon =>
                     <ListItem key={pokemon.id}>
                         <ListItemText primary={pokemon.name + " - " + pokemon.type} />
-                        <IconButton>
+                        <IconButton onClick={() => handleOpenUpdate(pokemon)}>
                             <CreateIcon />
                         </IconButton>
                     </ListItem>
@@ -129,6 +144,14 @@ const PokemonList = ({ pokemons, boxId, setPokemons }) => {
                 aria-describedby="simple-modal-description"
             >
                 {Body({ add: true })}
+            </Modal>
+            <Modal
+                open={updateOpen}
+                onClose={handleCloseUpdate}
+                aria-labelledby="update-modal-title"
+                aria-describedby="update-modal-description"
+            >
+                {Body({ add: false })}
             </Modal>
         </>
     );

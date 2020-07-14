@@ -140,7 +140,7 @@ export const deletePokemon = pokemonId =>
  */
 export const updatePokemon = (pokemonId, pokemon) =>
     pokeFetch(
-        `pokemons/${pokemonId}`,
+        `/pokemons/${pokemonId}`,
         HTTP_METHODS.PUT,
         pokemon
     );
