@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,19 +9,25 @@ import * as pages from './pages'
 import { Grid, Box } from '@material-ui/core';
 import { BoxList } from './components/box';
 import { PokemonList } from './components/pokemon';
+import { fetchAllTrainers, fetchAllPokemons, fetchAllBoxes } from './services/fetchers';
+import { TrainerList } from './components/trainer';
+
+
 
 const App = () => {
   const [trainers, setTrainers] = useState([]);
   const [pokemons, setPokemons] = useState([]);
   const [boxes, setBoxes] = useState([]);
 
-  fetchAllTrainers().then(res => setTrainers(res));
-  fetchAllPokemons().then(res => setPokemons(res));
-  fetchAllBoxes().then(res => setBoxes(res));
+  const [trainerId, setTrainerId] = useState(null);
+  const [boxId, setBoxId] = useState(null);
 
-  let trainerId = 0
-  let pokemonId = 0
-  let boxId = 0
+
+  useEffect(() => {
+    fetchAllTrainers().then(res => setTrainers(res));
+    fetchAllPokemons().then(res => setPokemons(res));
+    fetchAllBoxes().then(res => setBoxes(res));
+  }, []);
 
   return (
     <Router>
@@ -49,7 +55,7 @@ const App = () => {
                 <Grid container item justify="center">
                   <Box m={2}>
                     <h2>Tous les dresseurs</h2>
-                    <TrainerList trainers={trainers} />
+                    <TrainerList  setTrainers={setTrainers} trainers={trainers} setTrainerId={setTrainerId} />
                   </Box>
                 </Grid>
               </Box>
@@ -57,7 +63,7 @@ const App = () => {
                 <Grid item container justify="center">
                   <Box m={2}>
                     <h2>Box</h2>
-                    <BoxList boxes={trainerId != 0 ? boxes.filter(b => b.owner == trainerId) : []} />
+                    <BoxList setBoxes={setBoxes} trainerId={trainerId} setBoxId={setBoxId} allBoxes={boxes} boxes={trainerId !== 0 ? boxes.filter(b => b.owner && b.owner.id === trainerId) : []} />
                   </Box>
                 </Grid>
               </Box>
@@ -65,7 +71,7 @@ const App = () => {
                 <Grid item container justify="center">
                   <Box m={2}>
                     <h2>Pokémons</h2>
-                    <PokemonList pokemons={boxId != 0 ? pokemons.filter(p => p.box == boxId) : []} />
+                    <PokemonList setPokemons={setPokemons} boxId={boxId} setPokemons={setPokemons} pokemons={boxId !== 0 ? pokemons.filter(p => p.box && p.box.id=== boxId) : []} />
                   </Box>
                 </Grid>
               </Box>

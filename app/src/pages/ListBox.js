@@ -1,20 +1,20 @@
 import React from "react"
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 import { Box } from "@material-ui/core"
 import { BoxList } from '../components/box';
 
-const useStyles = makeStyles({
-    root: {
-        width: "200px",
-        marginBottom: "20px"
-    }, 
-    icon: {
-        padding: "0",
-    },
-});
+//const useStyles = makeStyles({
+//     root: {
+//         width: "200px",
+//         marginBottom: "20px"
+//     }, 
+//     icon: {
+//         padding: "0",
+//     },
+// });
 
 const ListBox = () => {
-    const classes = useStyles();
+    //const classes = useStyles();
 
     return (
         <Box m={2}>

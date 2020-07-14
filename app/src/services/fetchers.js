@@ -1,4 +1,4 @@
-const ENDPOINT = "http://localhost:3000";
+const ENDPOINT = "http://localhost:3001";
 
 const HTTP_METHODS = {
     GET: 'GET',
