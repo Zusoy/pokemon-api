@@ -12,7 +12,7 @@ import {
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 import CreateIcon from '@material-ui/icons/Create';
-import { createTrainer } from '../../services/fetchers';
+import { createTrainer, updateTrainer } from '../../services/fetchers';
 
 function getModalStyle() {
     return {
@@ -40,11 +40,14 @@ const useStyles = makeStyles((theme) =>
         },
     }),
 );
-const TrainerList = ({ trainers, setTrainerId, setTrainer }) => {
+const TrainerList = ({ trainers }) => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
+    const [updateOpen, setUpdateOpen] = useState(false);
+    const [trainer, setTrainer] = useState(null);
     const [modalStyle] = useState(getModalStyle);
     const [value, setValue] = useState("");
+
     const handleOpen = () => {
         setOpen(true);
     };
@@ -52,6 +55,16 @@ const TrainerList = ({ trainers, setTrainerId, setTrainer }) => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleUpdateOpen = trainer => {
+        setTrainer(trainer);
+        setValue(trainer.name);
+        setUpdateOpen(true);
+    }
+
+    const handleUpdateClose = () => {
+        setUpdateOpen(false);
+    }
 
     const handleChange = (event) => {
         setValue(event.target.value);
@@ -62,7 +75,10 @@ const TrainerList = ({ trainers, setTrainerId, setTrainer }) => {
             <h2 id="simple-modal-title">{add ? "Ajouter un dresseur" : "Modifier un dresseur"}</h2>
             <TextField id="outlined-basic" label="Nom du dresseur" value={value} onChange={handleChange} variant="outlined" />
             <br></br>
-            <Button onClick={() => { createTrainer({ name: value, boxes: [] }).then(res => {trainers.push(res), handleClose()})}} variant="contained">Sauvegarder</Button>
+            {add
+                ? <Button onClick={() => { createTrainer({ name: value, boxes: [] }).then(res => {trainers.push(res), handleClose()})}} variant="contained">Sauvegarder</Button>
+                : <Button onClick={() => { updateTrainer(trainer.id, {name: value}), handleUpdateClose() }} variant="contained">Sauvegarder</Button>
+            }
         </div>
     };
 
@@ -71,8 +87,8 @@ const TrainerList = ({ trainers, setTrainerId, setTrainer }) => {
             <List className={classes.root}>
                 {trainers.map(trainer =>
                     <ListItem key={trainer.id}>
-                        <ListItemText primary={trainer.name}  onClick={() => setTrainerId(trainer.id)} />
-                        <IconButton>
+                        <ListItemText primary={trainer.name} />
+                        <IconButton data-id={trainer.id} onClick={() => handleUpdateOpen(trainer)}>
                             <CreateIcon />
                         </IconButton>
                     </ListItem>
@@ -85,7 +101,15 @@ const TrainerList = ({ trainers, setTrainerId, setTrainer }) => {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                {Body({ add: true, setTrainer: setTrainer })}
+                {Body({ add: true })}
+            </Modal>
+            <Modal
+                open={updateOpen}
+                onClose={handleUpdateClose}
+                aria-labelledby="update-modal-title"
+                aria-describedby="update-modal-description"
+            >
+                {Body({ add: false })}
             </Modal>
         </>
     )
